@@ -38,12 +38,25 @@ with open('words.txt', 'r') as f:
 			wordlist.append(w)
 print(wordlist)
 
+for guess in dictionary:
+	guess_hash = crypt.crypt(guess, salt)
+	if(guess_hash == real_hash):
+        print 'password is {}.'.format(guess)
+        break
+    print(guess)
 
-# for password_length in range(6, 9):
-#     for guess in itertools.product(printable_str, repeat=password_length):
-#         guess = ''.join(guess)
-#         guess_hash = crypt.crypt(guess, salt)
-#         if(guess_hash == real_hash):
-#         	print 'password is {}.'.format(guess)
-#         	break
-#         print(guess)
+for guess in wordlist:
+	guess_hash = crypt.crypt(guess, salt)
+	if(guess_hash == real_hash):
+        print 'password is {}.'.format(guess)
+        break
+    print(guess)
+
+for password_length in range(6, 9):
+    for guess in itertools.product(printable_str, repeat=password_length):
+        guess = ''.join(guess)
+        guess_hash = crypt.crypt(guess, salt)
+        if(guess_hash == real_hash):
+        	print 'password is {}.'.format(guess)
+        	break
+        print(guess)
