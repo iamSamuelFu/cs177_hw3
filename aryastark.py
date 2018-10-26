@@ -15,7 +15,7 @@ import string
 #             print(guess, attempts)
 
 # print(guess_password('abc'))
-alt = "$1$bAc99821$"
+salt = "$1$bAc99821$"
 real_hash = "noxC9VXXiMuA0IRfECCVA/"
 
 lowercase_str = string.ascii_lowercase
