@@ -15,15 +15,16 @@ import string
 #             print(guess, attempts)
 
 # print(guess_password('abc'))
-lowercase = string.ascii_lowercase
+alt = "$1$bAc99821$"
+real_hash = "noxC9VXXiMuA0IRfECCVA/"
+
+lowercase_str = string.ascii_lowercase
+print(lowercase_str)
 
 printable_str = ""
 for i in range(32,127):
     printable_str += chr(i)
 print(printable_str)
-
-salt = "$1$bAc99821$"
-real_hash = "noxC9VXXiMuA0IRfECCVA/"
 
 dictionary = []
 with open('dictionary.txt', 'r') as f:
@@ -43,6 +44,7 @@ def craker():
 
     for guess in dictionary:
         guess_hash = crypt.crypt(guess, salt)
+        guess_hash = guess_hash[2:]
         if(guess_hash == real_hash):
             return 'password is {}.'.format(guess)
         print(guess)
@@ -50,15 +52,17 @@ def craker():
 
     for guess in wordlist:
         guess_hash = crypt.crypt(guess, salt)
+        guess_hash = guess_hash[2:]
         if(guess_hash == real_hash):
             return 'password is {}.'.format(guess)
         print(guess)
     print("------------wordlist runs out-----------------")
 
     for password_length in range(6, 9):
-        for guess in itertools.product(lowercase, repeat=password_length):
+        for guess in itertools.product(lowercase_str, repeat=password_length):
             guess = ''.join(guess)
             guess_hash = crypt.crypt(guess, salt)
+            guess_hash = guess_hash[2:]
             if(guess_hash == real_hash):
                 return 'password is {}.'.format(guess)
             print(guess)
@@ -68,6 +72,7 @@ def craker():
         for guess in itertools.product(printable_str, repeat=password_length):
             guess = ''.join(guess)
             guess_hash = crypt.crypt(guess, salt)
+            guess_hash = guess_hash[2:]
             if(guess_hash == real_hash):
                 return 'password is {}.'.format(guess)
             print(guess)

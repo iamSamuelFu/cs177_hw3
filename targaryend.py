@@ -43,6 +43,7 @@ def craker():
 
     for guess in dictionary:
         guess_hash = crypt.crypt(guess, salt)
+        guess_hash = guess_hash[2:]
         if(guess_hash == real_hash):
             return 'password is {}.'.format(guess)
         print(guess)
@@ -50,6 +51,7 @@ def craker():
 
     for guess in wordlist:
         guess_hash = crypt.crypt(guess, salt)
+        guess_hash = guess_hash[2:]
         if(guess_hash == real_hash):
             return 'password is {}.'.format(guess)
         print(guess)
@@ -59,6 +61,7 @@ def craker():
         for guess in itertools.product(lowercase, repeat=password_length):
             guess = ''.join(guess)
             guess_hash = crypt.crypt(guess, salt)
+            guess_hash = guess_hash[2:]
             if(guess_hash == real_hash):
                 return 'password is {}.'.format(guess)
             print(guess)
@@ -68,6 +71,7 @@ def craker():
         for guess in itertools.product(printable_str, repeat=password_length):
             guess = ''.join(guess)
             guess_hash = crypt.crypt(guess, salt)
+            guess_hash = guess_hash[2:]
             if(guess_hash == real_hash):
                 return 'password is {}.'.format(guess)
             print(guess)
