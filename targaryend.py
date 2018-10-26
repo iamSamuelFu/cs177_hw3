@@ -15,10 +15,11 @@ import string
 #             print(guess, attempts)
 
 # print(guess_password('abc'))
+lowercase = string.ascii_lowercase
 
 printable_str = ""
 for i in range(32,127):
-	printable_str += chr(i)
+    printable_str += chr(i)
 print(printable_str)
 
 salt = "aa"
@@ -26,37 +27,52 @@ real_hash = ".YVJDT1VruA"
 
 dictionary = []
 with open('dictionary.txt', 'r') as f:
-	for l in f:
-		for w in l.split():
-			dictionary.append(w)
+    for l in f:
+        for w in l.split():
+            dictionary.append(w)
 print(dictionary)
 
 wordlist = []
 with open('words.txt', 'r') as f:
-	for l in f:
-		for w in l.split():
-			wordlist.append(w)
+    for l in f:
+        for w in l.split():
+            wordlist.append(w)
 print(wordlist)
 
-for guess in dictionary:
-	guess_hash = crypt.crypt(guess, salt)
-	if(guess_hash == real_hash):
-        print 'password is {}.'.format(guess)
-        break
-    # print(guess)
+def craker():
 
-for guess in wordlist:
-	guess_hash = crypt.crypt(guess, salt)
-	if(guess_hash == real_hash):
-        print 'password is {}.'.format(guess)
-        break
-    # print(guess)
-
-for password_length in range(6, 9):
-    for guess in itertools.product(printable_str, repeat=password_length):
-        guess = ''.join(guess)
+    for guess in dictionary:
         guess_hash = crypt.crypt(guess, salt)
         if(guess_hash == real_hash):
-        	print 'password is {}.'.format(guess)
-        	break
-        # print(guess)
+            return 'password is {}.'.format(guess)
+        print(guess)
+    print("------------dictionary runs out-----------------")
+
+    for guess in wordlist:
+        guess_hash = crypt.crypt(guess, salt)
+        if(guess_hash == real_hash):
+            return 'password is {}.'.format(guess)
+        print(guess)
+    print("------------wordlist runs out-----------------")
+
+    for password_length in range(6, 9):
+        for guess in itertools.product(lowercase, repeat=password_length):
+            guess = ''.join(guess)
+            guess_hash = crypt.crypt(guess, salt)
+            if(guess_hash == real_hash):
+                return 'password is {}.'.format(guess)
+            print(guess)
+    print("------------lowercase runs out-----------------")
+
+    for password_length in range(6, 9):
+        for guess in itertools.product(printable_str, repeat=password_length):
+            guess = ''.join(guess)
+            guess_hash = crypt.crypt(guess, salt)
+            if(guess_hash == real_hash):
+                return 'password is {}.'.format(guess)
+            print(guess)
+    return '------------nothing matches-----------------'
+
+print("------------Began------------")
+craker()
+print("------------End------------")
