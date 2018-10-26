@@ -59,7 +59,7 @@ def craker():
     #     print(guess)
     # print("------------wordlist runs out-----------------")
 
-    for password_length in range(6, 7):
+    for password_length in range(6, 9):
         for guess in itertools.product(lowercase, repeat=password_length):
             guess = ''.join(guess)
             guess_hash = crypt.crypt(guess, salt)
