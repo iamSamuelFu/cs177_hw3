@@ -19,6 +19,7 @@ real_hash = ".YVJDT1VruA"
 
 # print(guess_password('abc'))
 lowercase = string.ascii_lowercase
+lowercase = lowercase[::-1]
 
 # printable_str = ""
 # for i in range(32,127):
@@ -64,7 +65,8 @@ def craker():
             guess_hash = crypt.crypt(guess, salt)
             guess_hash = guess_hash[2:]
             if(guess_hash == real_hash):
-                return 'password is {}.'.format(guess)
+                print 'password is {} with hash value {}.'.format(guess, guess_hash)
+                return
             print 'Guess is {} with hash value {}.'.format(guess, guess_hash)
     print("------------lowercase runs out-----------------")
 
