@@ -42,25 +42,16 @@ print(wordlist)
 
 def craker():
 
-    for guess in dictionary:
-        guess_hash = crypt.crypt(guess, salt)
-        guess_hash = guess_hash[2:]
-        if(guess_hash == real_hash):
-            print 'password is {} with hash value {}.'.format(guess, guess_hash)
-            return
-        print 'Guess is {} with hash value {}.'.format(guess, guess_hash)
-    print("------------dictionary runs out-----------------")
-
     for guess in wordlist:
         guess_hash = crypt.crypt(guess, salt)
         guess_hash = guess_hash[2:]
         if(guess_hash == real_hash):
             print 'password is {} with hash value {}.'.format(guess, guess_hash)
             return
-        print 'Guess is {} with hash value {}.'.format(guess, guess_hash)
+        print 'Wordlist guess is {} with hash value {}.'.format(guess, guess_hash)
     print("------------wordlist runs out-----------------")
 
-    for password_length in range(6, 9):
+    for password_length in range(6, 11):
         for guess in itertools.product(lowercase_str, repeat=password_length):
             guess = ''.join(guess)
             guess_hash = crypt.crypt(guess, salt)
@@ -68,10 +59,19 @@ def craker():
             if(guess_hash == real_hash):
                 print 'password is {} with hash value {}.'.format(guess, guess_hash)
                 return
-            print 'Guess is {} with hash value {}.'.format(guess, guess_hash)
+            print 'Lowercase letter guess is {} with hash value {}.'.format(guess, guess_hash)
     print("------------lowercase runs out-----------------")
 
-    for password_length in range(6, 9):
+    for guess in dictionary:
+        guess_hash = crypt.crypt(guess, salt)
+        guess_hash = guess_hash[2:]
+        if(guess_hash == real_hash):
+            print 'password is {} with hash value {}.'.format(guess, guess_hash)
+            return
+        print 'Dictionary guess is {} with hash value {}.'.format(guess, guess_hash)
+    print("------------dictionary runs out-----------------")
+
+    for password_length in range(6, 11):
         for guess in itertools.product(printable_str, repeat=password_length):
             guess = ''.join(guess)
             guess_hash = crypt.crypt(guess, salt)
@@ -79,7 +79,7 @@ def craker():
             if(guess_hash == real_hash):
                 print 'password is {} with hash value {}.'.format(guess, guess_hash)
                 return
-            print 'Guess is {} with hash value {}.'.format(guess, guess_hash)
+            print 'Brute force guess is {} with hash value {}.'.format(guess, guess_hash)
     return '------------nothing matches-----------------'
 
 print("------------Began------------")
