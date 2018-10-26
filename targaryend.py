@@ -3,6 +3,9 @@ import crypt
 import itertools
 import string
 
+salt = "aa"
+real_hash = ".YVJDT1VruA"
+
 # def guess_password(real):
 #     chars = string.ascii_lowercase + string.digits
 #     attempts = 0
@@ -22,8 +25,6 @@ lowercase = string.ascii_lowercase
 #     printable_str += chr(i)
 # print(printable_str)
 
-# salt = "aa"
-# real_hash = ".YVJDT1VruA"
 
 # dictionary = []
 # with open('dictionary.txt', 'r') as f:
